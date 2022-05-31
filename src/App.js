@@ -1,14 +1,31 @@
 import { nanoid } from "nanoid"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Toolbar from "./components/toolbar"
 
 export default function App() {
     const [notes, setNotes] = useState([])
-    const [currentNoteID, setCurrentNoteID] = useState(notes[0] && notes[0].id)
+    const [currentNoteID, setCurrentNoteID] = useState()
+
+    useEffect(() => {
+        localStorage.setItem("notes", JSON.stringify(notes))
+    }, [notes])
 
     function handleInput(e) {
-        const currentNote = notes.find(note => note.id === currentNoteID)
-        currentNote.content = e.target.innerHTML.replace(/&nbsp;/g, ' ').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+        setNotes(prevState => {
+            const newState = []
+            prevState.map(note => {
+                if (note.id === currentNoteID) {
+                    note.content = e.target.innerHTML.replace(/&nbsp;/g, ' ').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+                    note.timeEdited.time = getTimeAndDate().time
+                    note.timeEdited.date = getTimeAndDate().date
+                    newState.push(note)
+                }
+                else {
+                    newState.push(note)
+                }
+            })
+            return newState
+        })
     }
 
     function getTimeAndDate() {
@@ -89,6 +106,7 @@ export default function App() {
 
     function handleTest() {
         console.log(notes)
+        console.log("current note id: " + currentNoteID)
     }
 
     return (
