@@ -2,10 +2,9 @@
 export default function Toolbar() {
 
     function handleClick(property) {
-        console.log(typeof property+ " "+ property)
         document.execCommand(property)
-
     }
+    
     return (
         <div className="toolbar">
             <button
