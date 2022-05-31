@@ -3,17 +3,24 @@ import { useState, useEffect } from "react"
 import Toolbar from "./components/toolbar"
 
 export default function App() {
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes] = useState(() => {
+        if (localStorage.getItem("notes")){
+           return JSON.parse(localStorage.getItem("notes"))
+        }
+        else {
+            return []
+        }
+    })
     const [currentNoteID, setCurrentNoteID] = useState()
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
-
+    
     function handleInput(e) {
         setNotes(prevState => {
             const newState = []
-            prevState.map(note => {
+            prevState.forEach(note => {
                 if (note.id === currentNoteID) {
                     note.content = e.target.innerHTML.replace(/&nbsp;/g, ' ').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
                     note.timeEdited.time = getTimeAndDate().time
@@ -99,7 +106,6 @@ export default function App() {
                 time: getTimeAndDate().time
             }
         }
-        console.log(newNote)
         setNotes(prevState => [...prevState, newNote])
         setCurrentNoteID(newNoteID)
     }
@@ -107,6 +113,7 @@ export default function App() {
     function handleTest() {
         console.log(notes)
         console.log("current note id: " + currentNoteID)
+        console.log(localStorage.getItem("notes"))
     }
 
     return (
