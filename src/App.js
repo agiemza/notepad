@@ -12,19 +12,27 @@ export default function App() {
             return []
         }
     })
-    const [currentNoteID, setCurrentNoteID] = useState(notes[0].id)
+    const [currentNoteID, setCurrentNoteID] = useState(notes.length > 0 && notes[0].id)
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
 
     useEffect(() => {
-        const previousActive = document.querySelector(".activeNote")
-        previousActive && previousActive.classList.remove("activeNote")
-        document.getElementById(currentNoteID).classList.add("activeNote")  
-             
-        const currentNote = notes.find(note => note.id===currentNoteID)
-        document.getElementById("textArea").innerHTML = currentNote.content
+        if (notes.length > 1) {
+            const previousActive = document.querySelector(".activeNote")
+            previousActive && previousActive.classList.remove("activeNote")
+            document.getElementById(currentNoteID).classList.add("activeNote")
+
+            document.getElementById(currentNoteID).classList.add("activeNote")
+            const currentNote = notes.find(note => note.id === currentNoteID)
+            document.getElementById("textArea").innerHTML = currentNote.content
+            
+        }  else if (notes.length == 1) {
+
+            document.getElementById(currentNoteID).classList.add("activeNote")
+        }
+
     }, [currentNoteID])
 
     function handleInput(e) {
@@ -128,7 +136,7 @@ export default function App() {
     function handleTest() {
         // console.log(localStorage.getItem("notes"))
         console.log(currentNoteID)
-        const sth = notes.find(note => note.id===currentNoteID)
+        const sth = notes.find(note => note.id === currentNoteID)
         console.log(sth.content)
     }
 
