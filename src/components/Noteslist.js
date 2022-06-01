@@ -4,8 +4,9 @@ export default function Noteslist({ createNewNote, changeNote, notes }) {
         return notes.map(note => {
             return (
                 <div 
+                key={note.id}
+                id={note.id}
                 className="note-card" 
-                key={note.id} 
                 onClick={() => {
                     changeNote(note)
                 }}>

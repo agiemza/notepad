@@ -39,7 +39,9 @@
     padding: 10px;
     margin: 3px 0;
 }
-
+.activeNote {
+    background-color: pink;
+}
 .note-card-title {
     font-size: 14px;
     font-weight: 700;

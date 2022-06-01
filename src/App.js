@@ -18,6 +18,12 @@ export default function App() {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
 
+    useEffect(() => {
+        const previousActive = document.querySelector(".activeNote")
+        previousActive && previousActive.classList.remove("activeNote")
+        document.getElementById(currentNoteID).classList.add("activeNote")
+    }, [currentNoteID])
+
     function handleInput(e) {
         setNotes(prevState => {
             const newState = []
