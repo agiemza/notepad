@@ -7,7 +7,6 @@ export default function Toolbar(props) {
 
     return (
         <div className="toolbar">
-            <button onClick={props.createNewNote}>New note</button>
             <div className="stylingBar">
                 <button
                     onClick={() => handleClick("bold")}

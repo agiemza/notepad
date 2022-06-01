@@ -12,7 +12,7 @@ export default function App() {
             return []
         }
     })
-    const [currentNoteID, setCurrentNoteID] = useState()
+    const [currentNoteID, setCurrentNoteID] = useState(notes[0].id)
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
@@ -105,14 +105,20 @@ export default function App() {
             timeEdited: {
                 date: getTimeAndDate().date,
                 time: getTimeAndDate().time
-            }
+            },
         }
         setNotes(prevState => [...prevState, newNote])
         setCurrentNoteID(newNoteID)
     }
 
+    function changeNote(note) {
+        setCurrentNoteID(note.id)
+        document.getElementById("textArea").innerHTML = note.content
+    }
+
     function handleTest() {
-        console.log(localStorage.getItem("notes"))
+        // console.log(localStorage.getItem("notes"))
+        console.log(currentNoteID)
     }
 
     return (
@@ -120,13 +126,13 @@ export default function App() {
             <button onClick={handleTest}>Test something</button>
             <div className="side-menu">
                 <Noteslist
+                    createNewNote={createNewNote}
+                    changeNote={changeNote}
                     notes={notes}
                 />
             </div>
             <div className="notepad-container">
-                <Toolbar
-                    createNewNote={createNewNote}
-                />
+                <Toolbar />
                 <div className="textArea" id="textArea" onInput={(e) => handleInput(e)} contentEditable suppressContentEditableWarning>
                 </div>
             </div>
