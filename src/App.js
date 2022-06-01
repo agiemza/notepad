@@ -1,11 +1,12 @@
 import { nanoid } from "nanoid"
 import { useState, useEffect } from "react"
-import Toolbar from "./components/toolbar"
+import Toolbar from "./components/Toolbar"
+import Noteslist from "./components/Noteslist"
 
 export default function App() {
     const [notes, setNotes] = useState(() => {
-        if (localStorage.getItem("notes")){
-           return JSON.parse(localStorage.getItem("notes"))
+        if (localStorage.getItem("notes")) {
+            return JSON.parse(localStorage.getItem("notes"))
         }
         else {
             return []
@@ -16,7 +17,7 @@ export default function App() {
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
     }, [notes])
-    
+
     function handleInput(e) {
         setNotes(prevState => {
             const newState = []
@@ -111,16 +112,16 @@ export default function App() {
     }
 
     function handleTest() {
-        console.log(notes)
-        console.log("current note id: " + currentNoteID)
         console.log(localStorage.getItem("notes"))
     }
 
     return (
         <section className="app">
             <button onClick={handleTest}>Test something</button>
-            <div className="allnotes-container">
-                {/* {notes} */}
+            <div className="side-menu">
+                <Noteslist
+                    notes={notes}
+                />
             </div>
             <div className="notepad-container">
                 <Toolbar
