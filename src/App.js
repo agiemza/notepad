@@ -21,7 +21,10 @@ export default function App() {
     useEffect(() => {
         const previousActive = document.querySelector(".activeNote")
         previousActive && previousActive.classList.remove("activeNote")
-        document.getElementById(currentNoteID).classList.add("activeNote")
+        document.getElementById(currentNoteID).classList.add("activeNote")  
+             
+        const currentNote = notes.find(note => note.id===currentNoteID)
+        document.getElementById("textArea").innerHTML = currentNote.content
     }, [currentNoteID])
 
     function handleInput(e) {
@@ -32,7 +35,7 @@ export default function App() {
                     note.content = e.target.innerHTML.replace(/&nbsp;/g, ' ').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
                     note.timeEdited.time = getTimeAndDate().time
                     note.timeEdited.date = getTimeAndDate().date
-                    newState.push(note)
+                    newState.unshift(note)
                 }
                 else {
                     newState.push(note)
@@ -113,7 +116,7 @@ export default function App() {
                 time: getTimeAndDate().time
             },
         }
-        setNotes(prevState => [...prevState, newNote])
+        setNotes(prevState => [newNote, ...prevState])
         setCurrentNoteID(newNoteID)
     }
 
@@ -125,6 +128,8 @@ export default function App() {
     function handleTest() {
         // console.log(localStorage.getItem("notes"))
         console.log(currentNoteID)
+        const sth = notes.find(note => note.id===currentNoteID)
+        console.log(sth.content)
     }
 
     return (
@@ -143,7 +148,5 @@ export default function App() {
                 </div>
             </div>
         </section>
-
-
     )
 }
