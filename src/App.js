@@ -137,8 +137,10 @@ export default function App() {
             const newState = []
             prevState.map(item => item.id !== note.id && newState.push(item))
             if (newState.length > 0) {
-                setCurrentNoteID(newState[0].id)
-                updateTextarea(newState[0].content)
+                if (note.id === currentNoteID) {
+                    setCurrentNoteID(newState[0].id)
+                    updateTextarea(newState[0].content)
+                }
             } else {
                 setCurrentNoteID(false)
                 updateTextarea()
