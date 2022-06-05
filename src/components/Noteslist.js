@@ -1,4 +1,4 @@
-export default function Noteslist({ createNewNote, changeNote, notes }) {
+export default function Noteslist({ createNewNote, changeNote, notes, deleteNote }) {
 
     function displayNoteList() {
         return notes.map(note => {
@@ -20,6 +20,10 @@ export default function Noteslist({ createNewNote, changeNote, notes }) {
                         <div className="note-card-description" dangerouslySetInnerHTML={{ __html: note.content.slice(0, 50) }}>
                         </div>
                     </div>
+                    <button className="delete-button" onClick={(e) => {
+                        e.stopPropagation()
+                        deleteNote(note)
+                    }}>D</button>
                 </div>
             )
         })

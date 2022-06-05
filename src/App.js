@@ -22,15 +22,13 @@ export default function App() {
         if (notes.length > 1) {
             const previousActive = document.querySelector(".activeNote")
             previousActive && previousActive.classList.remove("activeNote")
-            document.getElementById(currentNoteID).classList.add("activeNote")
 
-            document.getElementById(currentNoteID).classList.add("activeNote")
+            currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
             const currentNote = notes.find(note => note.id === currentNoteID)
-            document.getElementById("textArea").innerHTML = currentNote.content
-            
-        }  else if (notes.length == 1) {
+            updateTextarea(currentNote.content)
 
-            document.getElementById(currentNoteID).classList.add("activeNote")
+        } else if (notes.length == 1) {
+            currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
         }
 
     }, [currentNoteID])
@@ -126,18 +124,36 @@ export default function App() {
         }
         setNotes(prevState => [newNote, ...prevState])
         setCurrentNoteID(newNoteID)
+        updateTextarea(newNote.content)
     }
 
     function changeNote(note) {
         setCurrentNoteID(note.id)
-        document.getElementById("textArea").innerHTML = note.content
+        updateTextarea(note.content)
     }
 
+    function deleteNote(note) {
+        setNotes(prevState => {
+            const newState = []
+            prevState.map(item => item.id !== note.id && newState.push(item))
+            if (newState.length > 0) {
+                setCurrentNoteID(newState[0].id)
+                updateTextarea(newState[0].content)
+            } else {
+                setCurrentNoteID(false)
+                updateTextarea()
+            }
+            return newState
+        })
+    }
+
+    function updateTextarea(content) {
+        content ? document.getElementById("textArea").innerHTML = content : document.getElementById("textArea").innerHTML = ""
+    }
+
+
     function handleTest() {
-        // console.log(localStorage.getItem("notes"))
         console.log(currentNoteID)
-        const sth = notes.find(note => note.id === currentNoteID)
-        console.log(sth.content)
     }
 
     return (
@@ -148,6 +164,7 @@ export default function App() {
                     createNewNote={createNewNote}
                     changeNote={changeNote}
                     notes={notes}
+                    deleteNote={deleteNote}
                 />
             </div>
             <div className="notepad-container">
