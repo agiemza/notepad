@@ -28,8 +28,22 @@ export default function App() {
             const currentNote = notes.find(note => note.id === currentNoteID)
             updateTextField(currentNote.title, "titleArea")
             updateTextField(currentNote.content, "textArea")
+            setContentEditable(true)
+        } else {
+            setContentEditable(false)
         }
     }, [currentNoteID])
+
+    function setContentEditable(value) {
+        if (value === false) {
+            document.getElementById("titleArea").classList.add("disabledArea")
+            document.getElementById("textArea").classList.add("disabledArea")
+        }
+        if (value === true) {            
+            document.getElementById("titleArea").classList.remove("disabledArea")
+            document.getElementById("textArea").classList.remove("disabledArea")
+        }
+    }
 
     function editTitle(e) {
         setNotes(prevState => {
