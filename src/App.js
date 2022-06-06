@@ -30,6 +30,7 @@ export default function App() {
             updateTextField(currentNote.content, "textArea")
             setContentEditable("titleArea", true)
             setContentEditable("textArea", true)
+            document.getElementById("textArea").focus()
         } else {
             setContentEditable("titleArea", false)
             setContentEditable("textArea", false)
@@ -198,15 +199,12 @@ export default function App() {
         content ? document.getElementById(field).innerHTML = content : document.getElementById(field).innerHTML = ""
     }
 
-    function handleTest() {
-        console.log(currentNoteID)
-        console.log(notes)
-    }
-
     return (
         <section className="app">
-            <button onClick={handleTest}>Test something</button>
             <div className="side-menu">
+                <div className="top-bar">
+                    <button className="new-button" onClick={createNewNote}></button>
+                </div>
                 <Noteslist
                     createNewNote={createNewNote}
                     changeNote={changeNote}
@@ -214,25 +212,28 @@ export default function App() {
                     deleteNote={deleteNote}
                 />
             </div>
-            <div className="notepad-container">
+            <div className="right-side">
                 <Toolbar />
-                <div
-                    className="titleArea"
-                    id="titleArea"
-                    onInput={e => editTitle(e)}
-                    onFocus={() => setContentEditable("stylingBar", false)}
-                    onBlur={() => setContentEditable("stylingBar", true)}
-                    onKeyPress={e => e.key === "Enter" && e.preventDefault()}
-                    contentEditable suppressContentEditableWarning>
-                </div>
-                <div
-                    className="textArea"
-                    id="textArea"
-                    onInput={e => editNote(e)}
-                    contentEditable
-                    suppressContentEditableWarning>
+                <div className="notepad-container">
+                    <div
+                        className="titleArea"
+                        id="titleArea"
+                        onInput={e => editTitle(e)}
+                        onFocus={() => setContentEditable("toolbar", false)}
+                        onBlur={() => setContentEditable("toolbar", true)}
+                        onKeyPress={e => e.key === "Enter" && e.preventDefault()}
+                        contentEditable suppressContentEditableWarning>
+                    </div>
+                    <div
+                        className="textArea"
+                        id="textArea"
+                        onInput={e => editNote(e)}
+                        contentEditable
+                        suppressContentEditableWarning>
+                    </div>
                 </div>
             </div>
+
         </section>
     )
 }

@@ -1,53 +1,169 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+@keyframes pulse {
+    0% {
+        background-color: #3e086d;
+    }
+
+    25% {
+        background-color: #7d2591;
+    }
+
+    50% {
+        background-color: #5c107f;
+    }
+
+    75% {
+        background-color: #7d2591;
+    }
+
+    100% {
+        background-color: #3e086d;
+    }
+}
+
 * {
     font-family: "Inter", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline-color: #3e086d;
+}
+
+body {
+    color: #dcdcdc;
+    background-color: #1e1e1e;
+}
+
+li {
+    list-style-position: inside;
 }
 
 .app {
     display: flex;
 }
 
+::selection {
+    background: #5c5a5e;
+}
+
+button {
+    font-size: 100%;
+    min-width: 25px;
+    height: 25px;
+    color: #a8a3a9;
+    background: none;
+    border: none;
+    border-radius: 3px;
+    padding: 0 5px;
+}
+
+button:hover {
+    color: #9e9ca2;
+    background-color: #39333f;
+}
+
+button:active {
+    color: #ffffff;
+    background-color: #454148;
+}
+
+.toolbar>button {
+    border: 1px solid #1b191f;
+}
+
+.toolbar>button:hover {
+    border: 1px solid #39333f;
+}
+
+.toolbar>button:active {
+    border: 1px solid #454148;
+}
+
+.new-button {
+    background-image: url("./images/new-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+}
+
+.new-button:active {
+    background-image: url("./images/new-white.png");
+}
+
+.delete-button {
+    position: absolute;
+    right: 10px;
+    background-image: url("./images/trash-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.delete-button:active {
+    background-image: url("./images/trash-white.png");
+}
+
 .side-menu {
-    width: 30%;
-    height: 100vh;
+    width: 20%;
+    min-width: 220px;
     display: flex;
+    flex-direction: column;
+    background-color: #201a27;
+    height: 100vh;
+    border-right: 1px solid rgb(20, 20, 20);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 15px;
+    height: 5%;
+    border-bottom: 1px solid rgb(20, 20, 20);
 }
 
 .allnotes-container {
+    height: 95%;
     width: 100%;
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     padding: 10px;
+}
+
+.empty-list-message {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 20px;
+    color: #5c5a5e;
 }
 
 .note-card {
     position: relative;
     width: 95%;
+    min-width: 200px;
     min-height: 80px;
     height: 80px;
-    background-color: rgb(220, 220, 220);
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    border-radius: 10px;
     overflow: hidden;
     padding: 10px;
     margin: 3px 0;
+    border-radius: 0;
 }
 
-.activeNote {
-    background-color: pink;
+.note-card:not(:last-of-type) {
+    border-bottom: 1px solid #37333e;
 }
+
 
 .note-card-title {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .note-card-description,
@@ -62,21 +178,47 @@
 }
 
 .note-card-date {
-    font-weight: 500;
+    color: #adadad;
+    font-weight: 300;
 }
 
 .note-card-description {
     font-weight: 200;
-    color: gray;
+    color: #7a7a7a;
     width: 100%;
     height: 16px;
 }
 
-.delete-button {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: 10px;
+.activeNote {
+    background-color: #3e086d;
+    animation: pulse 600s infinite;
+    border-radius: 10px;
+    border: none;
+}
+
+.activeNote:not(:last-of-type) {
+    border: none;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100vh;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    height: 5%;
+    border-bottom: 1px solid rgb(20, 20, 20);
+    padding: 5px;
+}
+
+.notepad-container {
+    height: 95%;
 }
 
 .titleArea {
@@ -86,7 +228,7 @@
     font-size: 20px;
     outline: none;
     width: 500px;
-    height: 40px;
+    height: 10%;
     padding: 5px;
     white-space: nowrap;
     overflow: hidden;
@@ -94,19 +236,22 @@
 }
 
 .titleArea:focus {
-    white-space: nowrap;
     overflow: scroll;
     cursor: text;
 }
 
 .textArea {
-    width: 500px;
-    height: 500px;
-    border: 1px solid lightgray;
+    width: 100%;
+    height: 90%;
     outline: none;
     padding: 5px;
+    overflow: scroll;
 }
 
 .disabledArea {
     pointer-events: none;
+}
+
+.disabledArea>button {
+    color: #5c5a5e;
 }
