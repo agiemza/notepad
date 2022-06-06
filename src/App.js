@@ -28,20 +28,21 @@ export default function App() {
             const currentNote = notes.find(note => note.id === currentNoteID)
             updateTextField(currentNote.title, "titleArea")
             updateTextField(currentNote.content, "textArea")
-            setContentEditable(true)
+            setContentEditable("titleArea", true)
+            setContentEditable("textArea", true)
         } else {
-            setContentEditable(false)
+            setContentEditable("titleArea", false)
+            setContentEditable("textArea", false)
         }
     }, [currentNoteID])
 
-    function setContentEditable(value) {
-        if (value === false) {
-            document.getElementById("titleArea").classList.add("disabledArea")
-            document.getElementById("textArea").classList.add("disabledArea")
+    function setContentEditable(id, value) {
+        const element = document.getElementById(id)
+        if (value === false && !element.classList.contains("disabledArea")) {
+            element.classList.add("disabledArea")
         }
-        if (value === true) {            
-            document.getElementById("titleArea").classList.remove("disabledArea")
-            document.getElementById("textArea").classList.remove("disabledArea")
+        if (value === true && element.classList.contains("disabledArea")) {
+            element.classList.remove("disabledArea")
         }
     }
 
@@ -67,8 +68,6 @@ export default function App() {
             const newState = []
             prevState.forEach(note => {
                 if (note.id === currentNoteID) {
-                    console.clear()
-                    console.log(note)
 
                     const input = e.target.innerHTML
 
@@ -221,6 +220,8 @@ export default function App() {
                     className="titleArea"
                     id="titleArea"
                     onInput={e => editTitle(e)}
+                    onFocus={() => setContentEditable("stylingBar", false)}
+                    onBlur={() => setContentEditable("stylingBar", true)}
                     onKeyPress={e => e.key === "Enter" && e.preventDefault()}
                     contentEditable suppressContentEditableWarning>
                 </div>

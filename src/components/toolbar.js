@@ -7,7 +7,7 @@ export default function Toolbar(props) {
 
     return (
         <div className="toolbar">
-            <div className="stylingBar">
+            <div className="stylingBar" id="stylingBar">
                 <button
                     className="styleButton"
                     onClick={() => handleClick("bold")}
