@@ -80,11 +80,23 @@
 }
 
 .titleArea {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 20px;
     outline: none;
-    width: 300px;
-    height: 30px;
+    width: 500px;
+    height: 40px;
     padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.titleArea:focus {
+    white-space: nowrap;
+    overflow: scroll;
+    cursor: text;
 }
 
 .textArea {

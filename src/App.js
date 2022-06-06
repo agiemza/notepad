@@ -19,19 +19,16 @@ export default function App() {
     }, [notes])
 
     useEffect(() => {
-        if (notes.length > 1) {
-            const previousActive = document.querySelector(".activeNote")
-            previousActive && previousActive.classList.remove("activeNote")
-
+        if (notes.length !== 0) {
+            if (notes.length > 1) {
+                const previousActive = document.querySelector(".activeNote")
+                previousActive && previousActive.classList.remove("activeNote")
+            }
             currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
             const currentNote = notes.find(note => note.id === currentNoteID)
             updateTextField(currentNote.title, "titleArea")
             updateTextField(currentNote.content, "textArea")
-
-        } else if (notes.length == 1) {
-            currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
         }
-
     }, [currentNoteID])
 
     function editTitle(e) {
@@ -163,7 +160,6 @@ export default function App() {
         setCurrentNoteID(note.id)
         updateTextField(note.title, "titleArea")
         updateTextField(note.content, "textArea")
-
     }
 
     function deleteNote(note) {
@@ -189,9 +185,9 @@ export default function App() {
         content ? document.getElementById(field).innerHTML = content : document.getElementById(field).innerHTML = ""
     }
 
-
     function handleTest() {
-
+        console.log(currentNoteID)
+        console.log(notes)
     }
 
     return (
