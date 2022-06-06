@@ -25,7 +25,8 @@ export default function App() {
 
             currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
             const currentNote = notes.find(note => note.id === currentNoteID)
-            updateTextarea(currentNote.content)
+            updateTextField(currentNote.title, "titleArea")
+            updateTextField(currentNote.content, "textArea")
 
         } else if (notes.length == 1) {
             currentNoteID && document.getElementById(currentNoteID).classList.add("activeNote")
@@ -33,14 +34,43 @@ export default function App() {
 
     }, [currentNoteID])
 
-    function handleInput(e) {
+    function editTitle(e) {
         setNotes(prevState => {
             const newState = []
             prevState.forEach(note => {
                 if (note.id === currentNoteID) {
-                    note.content = e.target.innerHTML.replace(/&nbsp;/g, ' ').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+                    note.title = e.target.innerHTML
+                    note.isNew && delete note.isNew
+                    newState.unshift(note)
+                }
+                else {
+                    newState.push(note)
+                }
+            })
+            return newState
+        })
+    }
+
+    function editNote(e) {
+        setNotes(prevState => {
+            const newState = []
+            prevState.forEach(note => {
+                if (note.id === currentNoteID) {
+                    console.clear()
+                    console.log(note)
+
+                    const input = e.target.innerHTML
+
+                    if (note.isNew && input.indexOf("<div>") !== -1) {
+                        note.title = input.slice(0, input.indexOf("<div>"))
+                        updateTextField(note.title, "titleArea")
+                        delete note.isNew
+                    }
+
+                    note.content = input
                     note.timeEdited.time = getTimeAndDate().time
                     note.timeEdited.date = getTimeAndDate().date
+
                     newState.unshift(note)
                 }
                 else {
@@ -121,15 +151,19 @@ export default function App() {
                 date: getTimeAndDate().date,
                 time: getTimeAndDate().time
             },
+            isNew: true
         }
         setNotes(prevState => [newNote, ...prevState])
         setCurrentNoteID(newNoteID)
-        updateTextarea(newNote.content)
+        updateTextField(newNote.title, "titleArea")
+        updateTextField(newNote.content, "textArea")
     }
 
     function changeNote(note) {
         setCurrentNoteID(note.id)
-        updateTextarea(note.content)
+        updateTextField(note.title, "titleArea")
+        updateTextField(note.content, "textArea")
+
     }
 
     function deleteNote(note) {
@@ -139,23 +173,25 @@ export default function App() {
             if (newState.length > 0) {
                 if (note.id === currentNoteID) {
                     setCurrentNoteID(newState[0].id)
-                    updateTextarea(newState[0].content)
+                    updateTextField(newState[0].title, "titleArea")
+                    updateTextField(newState[0].content, "textArea")
                 }
             } else {
                 setCurrentNoteID(false)
-                updateTextarea()
+                updateTextField("", "titleArea")
+                updateTextField("", "textArea")
             }
             return newState
         })
     }
 
-    function updateTextarea(content) {
-        content ? document.getElementById("textArea").innerHTML = content : document.getElementById("textArea").innerHTML = ""
+    function updateTextField(content, field) {
+        content ? document.getElementById(field).innerHTML = content : document.getElementById(field).innerHTML = ""
     }
 
 
     function handleTest() {
-        console.log(currentNoteID)
+
     }
 
     return (
@@ -171,7 +207,19 @@ export default function App() {
             </div>
             <div className="notepad-container">
                 <Toolbar />
-                <div className="textArea" id="textArea" onInput={(e) => handleInput(e)} contentEditable suppressContentEditableWarning>
+                <div
+                    className="titleArea"
+                    id="titleArea"
+                    onInput={e => editTitle(e)}
+                    onKeyPress={e => e.key === "Enter" && e.preventDefault()}
+                    contentEditable suppressContentEditableWarning>
+                </div>
+                <div
+                    className="textArea"
+                    id="textArea"
+                    onInput={e => editNote(e)}
+                    contentEditable
+                    suppressContentEditableWarning>
                 </div>
             </div>
         </section>

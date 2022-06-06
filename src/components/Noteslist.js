@@ -1,4 +1,4 @@
-export default function Noteslist({ createNewNote, changeNote, notes, deleteNote }) {
+export default function Noteslist({ createNewNote, changeNote, notes, deleteNote}) {
 
     function displayNoteList() {
         return notes.map(note => {
@@ -10,8 +10,10 @@ export default function Noteslist({ createNewNote, changeNote, notes, deleteNote
                     onClick={() => {
                         changeNote(note)
                     }}>
-                    <div className="note-card-title">
-                        {note.title.slice(0, 25)}
+                    <div
+                        className="note-card-title"
+                        dangerouslySetInnerHTML={{ __html: note.title }}
+                    >
                     </div>
                     <div className="note-card-bottom">
                         <div className="note-card-date">

@@ -9,6 +9,7 @@ export default function Toolbar(props) {
         <div className="toolbar">
             <div className="stylingBar">
                 <button
+                    className="styleButton"
                     onClick={() => handleClick("bold")}
                     style={{ fontWeight: '700' }}
                 >
