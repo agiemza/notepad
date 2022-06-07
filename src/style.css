@@ -72,13 +72,24 @@ button:active {
 .download-button {
     position: absolute;
     right: 5px;
+    background-image: url("./images/download-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.download-button:active {
+    background-image: url("./images/download-white.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
 }
 
 .new-button {
     background-image: url("./images/new-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 80%;
+    background-size: 60%;
 }
 
 .new-button:active {
@@ -96,6 +107,28 @@ button:active {
 
 .delete-button:active {
     background-image: url("./images/trash-white.png");
+}
+
+.numbered-button {
+    background-image: url("./images/number-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.numbered-button:active {
+    background-image: url("./images/number-white.png");
+}
+
+.bullet-button {
+    background-image: url("./images/bullet-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+.bullet-button:active {
+    background-image: url("./images/bullet-white.png");
 }
 
 .side-menu {
@@ -267,4 +300,12 @@ img {
 
 .disabledArea>button {
     color: #5c5a5e;
+}
+
+.disabledArea>.numbered-button {
+    background-image: url("./images/number-darkgray.png");
+}
+
+.disabledArea>.bullet-button {
+    background-image: url("./images/bullet-darkgray.png");
 }

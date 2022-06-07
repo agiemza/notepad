@@ -28,18 +28,18 @@ export default function App() {
             const currentNote = notes.find(note => note.id === currentNoteID)
             updateTextField(currentNote.title, "titleArea")
             updateTextField(currentNote.content, "textArea")
-            setContentEditable("titleArea", true)
-            setContentEditable("textArea", true)
+            disableElement("titleArea", true)
+            disableElement("textArea", true)
             updateNoteEditDate()
             document.getElementById("textArea").focus()
         } else {
-            setContentEditable("titleArea", false)
-            setContentEditable("textArea", false)
+            disableElement("titleArea", false)
+            disableElement("textArea", false)
             updateNoteEditDate()
         }
     }, [currentNoteID])
 
-    function setContentEditable(id, value) {
+    function disableElement(id, value) {
         const element = document.getElementById(id)
         if (value === false && !element.classList.contains("disabledArea")) {
             element.classList.add("disabledArea")
@@ -233,8 +233,8 @@ export default function App() {
                         className="titleArea"
                         id="titleArea"
                         onInput={e => editTitle(e)}
-                        onFocus={() => setContentEditable("toolbar", false)}
-                        onBlur={() => setContentEditable("toolbar", true)}
+                        onFocus={() => disableElement("toolbar", false)}
+                        onBlur={() => disableElement("toolbar", true)}
                         onKeyPress={e => e.key === "Enter" && e.preventDefault()}
                         contentEditable suppressContentEditableWarning>
                     </div>

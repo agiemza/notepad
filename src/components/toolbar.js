@@ -38,20 +38,19 @@ export default function Toolbar() {
                 S
             </button>
             <button
+                className="numbered-button"
                 onClick={() => handleClick("insertOrderedList")}
             >
-                1. Numered List
             </button>
             <button
+                className="bullet-button"
                 onClick={() => handleClick("insertUnorderedList")}
             >
-                Bulleted list
             </button>
             <button
                 className="download-button"
                 onClick={() => download()}
             >
-                Download
             </button>
         </div>
     )
