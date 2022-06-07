@@ -52,7 +52,7 @@ export default function App() {
             const newState = []
             prevState.forEach(note => {
                 if (note.id === currentNoteID) {
-                    note.title = e.target.innerHTML
+                    !e.target.innerHTML.includes("<img") ? note.title = e.target.innerHTML : e.target.innerHTML = note.title
                     note.isNew && delete note.isNew
                     newState.unshift(note)
                 }
@@ -215,6 +215,8 @@ export default function App() {
             <div className="right-side">
                 <Toolbar />
                 <div className="notepad-container">
+                    <div className="date-container">
+                    </div>
                     <div
                         className="titleArea"
                         id="titleArea"

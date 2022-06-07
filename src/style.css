@@ -219,6 +219,7 @@ button:active {
 
 .notepad-container {
     height: 95%;
+    padding: 0 20px;
 }
 
 .titleArea {
@@ -246,6 +247,9 @@ button:active {
     outline: none;
     padding: 5px;
     overflow: scroll;
+}
+img {
+    max-width: 100%;
 }
 
 .disabledArea {
