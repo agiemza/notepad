@@ -72,7 +72,7 @@ export default function App() {
 
                     const input = e.target.innerHTML
 
-                    if (note.isNew && input.indexOf("<div>") !== -1) {
+                    if (note.isNew && input.indexOf("<div>") !== -1 && !e.target.innerHTML.includes("<img")) {
                         note.title = input.slice(0, input.indexOf("<div>"))
                         updateTextField(note.title, "titleArea")
                         delete note.isNew
