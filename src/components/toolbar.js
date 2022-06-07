@@ -3,13 +3,17 @@ export default function Toolbar() {
     function handleClick(property) {
         document.execCommand(property)
     }
-    function heading(property) {
-        document.execCommand('insertOrderedList')
+    function download(){
+        const element = document.createElement("a")
+        const file = new Blob([document.getElementById("textArea").innerText], {type: 'text/plain'})
+        element.href = URL.createObjectURL(file)
+        element.download = `${document.getElementById("titleArea").innerText}.txt`
+        element.click()
     }
+
     return (
         <div className="toolbar" id="toolbar">
             <button
-                className="styleButton"
                 onClick={() => handleClick("bold")}
                 style={{ fontWeight: '700' }}
             >
@@ -42,6 +46,12 @@ export default function Toolbar() {
                 onClick={() => handleClick("insertUnorderedList")}
             >
                 Bulleted list
+            </button>
+            <button
+                className="download-button"
+                onClick={() => download()}
+            >
+                Download
             </button>
         </div>
     )

@@ -1,4 +1,4 @@
-export default function Noteslist({changeNote, notes, deleteNote }) {
+export default function Noteslist({ changeNote, notes, deleteNote }) {
 
     function displayNoteList() {
         if (notes.length > 0) {
@@ -31,7 +31,7 @@ export default function Noteslist({changeNote, notes, deleteNote }) {
                 )
             })
         } else {
-           return <div className="empty-list-message">You don't have any notes...</div>
+            return <div className="empty-list-message">You don't have any notes...</div>
         }
     }
 

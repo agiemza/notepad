@@ -192,7 +192,7 @@ export default function App() {
             } else {
                 setCurrentNoteID(false)
                 updateTextField("", "titleArea")
-                updateTextField("", "textArea")   
+                updateTextField("", "textArea")
             }
             return newState
         })
@@ -200,10 +200,10 @@ export default function App() {
 
     function updateNoteEditDate() {
         currentNoteID !== false ? notes.map(note => {
-           if(note.id === currentNoteID) {
-               document.getElementById("date-container").innerText=`${note.timeEdited.date} at ${note.timeEdited.time}`
-           }     
-        }) : document.getElementById("date-container").innerText=""
+            if (note.id === currentNoteID) {
+                document.getElementById("date-container").innerText = `${note.timeEdited.date} at ${note.timeEdited.time}`
+            }
+        }) : document.getElementById("date-container").innerText = ""
     }
 
 
@@ -247,7 +247,6 @@ export default function App() {
                     </div>
                 </div>
             </div>
-
         </section>
     )
 }

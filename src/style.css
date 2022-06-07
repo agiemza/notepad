@@ -48,7 +48,8 @@ li {
 }
 
 button {
-    font-size: 100%;
+    font-size: 85%;
+    font-weight: 300;
     min-width: 25px;
     height: 25px;
     color: #a8a3a9;
@@ -68,16 +69,9 @@ button:active {
     background-color: #454148;
 }
 
-.toolbar>button {
-    border: 1px solid #1b191f;
-}
-
-.toolbar>button:hover {
-    border: 1px solid #39333f;
-}
-
-.toolbar>button:active {
-    border: 1px solid #454148;
+.download-button {
+    position: absolute;
+    right: 5px;
 }
 
 .new-button {
@@ -120,6 +114,7 @@ button:active {
     align-items: center;
     padding: 0 15px;
     height: 5%;
+    min-height: 35px;
     border-bottom: 1px solid rgb(20, 20, 20);
 }
 
@@ -211,8 +206,10 @@ button:active {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
     gap: 5px;
     height: 5%;
+    min-height: 35px;
     border-bottom: 1px solid rgb(20, 20, 20);
     padding: 5px;
 }
@@ -225,7 +222,7 @@ button:active {
     font-size: 12px;
     font-weight: 300;
     color: #adadad;
-    
+
 }
 
 .notepad-container {
