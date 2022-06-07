@@ -30,10 +30,12 @@ export default function App() {
             updateTextField(currentNote.content, "textArea")
             setContentEditable("titleArea", true)
             setContentEditable("textArea", true)
+            updateNoteEditDate()
             document.getElementById("textArea").focus()
         } else {
             setContentEditable("titleArea", false)
             setContentEditable("textArea", false)
+            updateNoteEditDate()
         }
     }, [currentNoteID])
 
@@ -90,6 +92,7 @@ export default function App() {
             })
             return newState
         })
+        updateNoteEditDate()
     }
 
     function getTimeAndDate() {
@@ -143,7 +146,7 @@ export default function App() {
         }
 
         const date = `${day} ${month} ${dateObject.getFullYear()}`
-        const time = `${hours}:${minutes}:${seconds}`
+        const time = `${hours}:${minutes}`
 
         return { time, date }
     }
@@ -189,11 +192,20 @@ export default function App() {
             } else {
                 setCurrentNoteID(false)
                 updateTextField("", "titleArea")
-                updateTextField("", "textArea")
+                updateTextField("", "textArea")   
             }
             return newState
         })
     }
+
+    function updateNoteEditDate() {
+        currentNoteID !== false ? notes.map(note => {
+           if(note.id === currentNoteID) {
+               document.getElementById("date-container").innerText=`${note.timeEdited.date} at ${note.timeEdited.time}`
+           }     
+        }) : document.getElementById("date-container").innerText=""
+    }
+
 
     function updateTextField(content, field) {
         content ? document.getElementById(field).innerHTML = content : document.getElementById(field).innerHTML = ""
@@ -215,7 +227,7 @@ export default function App() {
             <div className="right-side">
                 <Toolbar />
                 <div className="notepad-container">
-                    <div className="date-container">
+                    <div className="date-container" id="date-container">
                     </div>
                     <div
                         className="titleArea"

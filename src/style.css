@@ -178,7 +178,7 @@ button:active {
 }
 
 .note-card-date {
-    color: #adadad;
+    color: #a8a3a9;
     font-weight: 300;
 }
 
@@ -217,6 +217,17 @@ button:active {
     padding: 5px;
 }
 
+.date-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
+    font-size: 12px;
+    font-weight: 300;
+    color: #adadad;
+    
+}
+
 .notepad-container {
     height: 95%;
     padding: 0 20px;
@@ -243,11 +254,12 @@ button:active {
 
 .textArea {
     width: 100%;
-    height: 90%;
+    height: 85%;
     outline: none;
     padding: 5px;
     overflow: scroll;
 }
+
 img {
     max-width: 100%;
 }
