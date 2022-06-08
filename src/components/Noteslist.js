@@ -11,22 +11,28 @@ export default function Noteslist({ changeNote, notes, deleteNote }) {
                         onClick={() => {
                             changeNote(note)
                         }}>
-                        <div
-                            className="note-card-title"
-                            dangerouslySetInnerHTML={{ __html: note.title }}
-                        >
-                        </div>
-                        <div className="note-card-bottom">
-                            <div className="note-card-date">
-                                {note.timeEdited.date}
+                        <div className="note-card-left">
+                            <div
+                                className="note-card-title"
+                                dangerouslySetInnerHTML={{ __html: note.title }}
+                            >
                             </div>
-                            <div className="note-card-description" dangerouslySetInnerHTML={{ __html: note.content.slice(0, 50) }}>
-                            </div>
+
+                                <div className="note-card-date">
+                                    {note.timeEdited.date}
+                                </div>
+                                <div className="note-card-description" dangerouslySetInnerHTML={{ __html: note.content.slice(0, 50) }}>
+                                </div>
+                        
                         </div>
-                        <button className="delete-button" onClick={(e) => {
-                            e.stopPropagation()
-                            deleteNote(note)
-                        }}></button>
+                        <div className="note-card-right">
+                            <button className="delete-button" onClick={(e) => {
+                                e.stopPropagation()
+                                deleteNote(note)
+                            }}></button>
+                        </div>
+
+
                     </div>
                 )
             })

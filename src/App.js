@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Toolbar from "./components/Toolbar"
 import Noteslist from "./components/Noteslist"
 
@@ -13,10 +13,26 @@ export default function App() {
         }
     })
     const [currentNoteID, setCurrentNoteID] = useState(notes.length > 0 && notes[0].id)
+    const [isMobile, setIsMobile] = useState(window.innerWidth > 900 ? false : true)
 
     useEffect(() => {
-        localStorage.setItem("notes", JSON.stringify(notes))
-    }, [notes])
+        if (isMobile) {
+            document.getElementById("side-menu").style.display="flex"
+            document.getElementById("right-side").style.display="none"
+        }
+        else {
+            document.getElementById("side-menu").style.display="flex"
+            document.getElementById("right-side").style.display="flex"
+        }
+    }, [isMobile])
+
+    function handleResize() {
+        window.innerWidth > 900 ? setIsMobile(false) : setIsMobile(true)
+    }
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize)
+    })
 
     useEffect(() => {
         if (notes.length !== 0) {
@@ -177,6 +193,10 @@ export default function App() {
         setCurrentNoteID(note.id)
         updateTextField(note.title, "titleArea")
         updateTextField(note.content, "textArea")
+        if (isMobile) {
+            document.getElementById("right-side").style.display = "flex"
+            document.getElementById("side-menu").style.display = "none"
+        }
     }
 
     function deleteNote(note) {
@@ -213,7 +233,10 @@ export default function App() {
 
     return (
         <section className="app">
-            <div className="side-menu">
+            <div
+                className="side-menu"
+                id="side-menu"
+            >
                 <div className="top-bar">
                     <button className="new-button" onClick={createNewNote}></button>
                 </div>
@@ -224,7 +247,10 @@ export default function App() {
                     deleteNote={deleteNote}
                 />
             </div>
-            <div className="right-side">
+            <div
+                className="right-side"
+                id="right-side"
+            >
                 <Toolbar />
                 <div className="notepad-container">
                     <div className="date-container" id="date-container">

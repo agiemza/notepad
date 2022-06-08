@@ -48,15 +48,16 @@ li {
 }
 
 button {
-    font-size: 85%;
+    font-size: 100%;
     font-weight: 300;
-    min-width: 25px;
-    height: 25px;
+    min-width: 35px;
+    height: 35px;
     color: #a8a3a9;
     background: none;
     border: none;
     border-radius: 3px;
     padding: 0 5px;
+    cursor: pointer;
 }
 
 button:hover {
@@ -69,27 +70,36 @@ button:active {
     background-color: #454148;
 }
 
+.hide-button {
+    display: none;
+    background-image: url("./images/x-red.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.hide-button:active {
+    background-image: url("./images/x-white.png");
+}
+
 .download-button {
     position: absolute;
     right: 5px;
     background-image: url("./images/download-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60%;
+    background-size: 50%;
 }
 
 .download-button:active {
     background-image: url("./images/download-white.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 60%;
 }
 
 .new-button {
     background-image: url("./images/new-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60%;
+    background-size: 50%;
 }
 
 .new-button:active {
@@ -97,23 +107,32 @@ button:active {
 }
 
 .delete-button {
-    position: absolute;
-    right: 10px;
     background-image: url("./images/trash-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60%;
+    background-size: 50%;
 }
 
 .delete-button:active {
     background-image: url("./images/trash-white.png");
 }
 
+.removeformat-button {
+    background-image: url("./images/tx-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.removeformat-button:active {
+    background-image: url("./images/tx-white.png");
+}
+
 .numbered-button {
     background-image: url("./images/number-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60%;
+    background-size: 50%;
 }
 
 .numbered-button:active {
@@ -124,11 +143,33 @@ button:active {
     background-image: url("./images/bullet-gray.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 60%;
+    background-size: 50%;
 }
 
 .bullet-button:active {
     background-image: url("./images/bullet-white.png");
+}
+
+.undo-button {
+    background-image: url("./images/undo-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.undo-button:active {
+    background-image: url("./images/undo-white.png");
+}
+
+.redo-button {
+    background-image: url("./images/redo-gray.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+.redo-button:active {
+    background-image: url("./images/redo-white.png");
 }
 
 .side-menu {
@@ -147,7 +188,7 @@ button:active {
     align-items: center;
     padding: 0 15px;
     height: 5%;
-    min-height: 35px;
+    min-height: 50px;
     border-bottom: 1px solid rgb(20, 20, 20);
 }
 
@@ -170,18 +211,34 @@ button:active {
 }
 
 .note-card {
-    position: relative;
     width: 95%;
     min-width: 200px;
     min-height: 80px;
     height: 80px;
     display: flex;
-    flex-flow: column nowrap;
     justify-content: center;
     overflow: hidden;
     padding: 10px;
     margin: 3px 0;
     border-radius: 0;
+}
+
+.note-card-left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 80%;
+    overflow: hidden;
+    cursor: default;
+    user-select: none;
+}
+
+.note-card-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
 }
 
 .note-card:not(:last-of-type) {
@@ -196,24 +253,23 @@ button:active {
 
 .note-card-description,
 .note-card-title {
+    width: 125px;
     white-space: nowrap;
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.note-card-bottom {
-    font-size: 12px;
-}
 
 .note-card-date {
+    font-size: 12px;
     color: #a8a3a9;
     font-weight: 300;
 }
 
 .note-card-description {
+    font-size: 12px;
     font-weight: 200;
     color: #7a7a7a;
-    width: 100%;
     height: 16px;
 }
 
@@ -221,11 +277,11 @@ button:active {
     background-color: #3e086d;
     animation: pulse 600s infinite;
     border-radius: 10px;
-    border: none;
+    border-bottom: none;
 }
 
 .activeNote:not(:last-of-type) {
-    border: none;
+    border-bottom: 1px solid #3e086d;
 }
 
 .right-side {
@@ -242,7 +298,7 @@ button:active {
     position: relative;
     gap: 5px;
     height: 5%;
-    min-height: 35px;
+    min-height: 50px;
     border-bottom: 1px solid rgb(20, 20, 20);
     padding: 5px;
 }
@@ -269,7 +325,7 @@ button:active {
     align-items: center;
     font-size: 20px;
     outline: none;
-    width: 500px;
+    width: 100%;
     height: 10%;
     padding: 5px;
     white-space: nowrap;
@@ -302,10 +358,77 @@ img {
     color: #5c5a5e;
 }
 
+.disabledArea>.removeformat-button {
+    background-image: url("./images/tx-darkgray.png");
+}
+
 .disabledArea>.numbered-button {
     background-image: url("./images/number-darkgray.png");
 }
 
 .disabledArea>.bullet-button {
     background-image: url("./images/bullet-darkgray.png");
+}
+
+.disabledArea>.undo-button {
+    background-image: url("./images/undo-darkgray.png");
+}
+
+.disabledArea>.redo-button {
+    background-image: url("./images/redo-darkgray.png");
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (max-width: 900px) {
+    .app {
+        height: 100vh;
+    }
+
+    .side-menu {
+        width: 100%;
+    }
+
+    .right-side {
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
+
+    .exit-button {
+        display: block;
+    }
+
+    .toolbar {
+        width: 100%;
+        justify-content: space-between;
+        position: fixed;
+        background-color: #1e1e1e;
+        overflow: scroll;
+    }
+
+    .notepad-container {
+        height: 100%;
+        margin-top: 50px;
+        overflow: scroll;
+    }
+
+    .titleArea {
+        width: 100%;
+        overflow: scroll;
+    }
+
+    .textArea {
+        overflow: visible;
+    }
+
+    .hide-button {
+        display: block;
+    }
+
+    .download-button {
+        position: static;
+    }
 }
