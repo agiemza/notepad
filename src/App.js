@@ -17,12 +17,12 @@ export default function App() {
 
     useEffect(() => {
         if (isMobile) {
-            document.getElementById("side-menu").style.display="flex"
-            document.getElementById("right-side").style.display="none"
+            document.getElementById("side-menu").style.display = "flex"
+            document.getElementById("right-side").style.display = "none"
         }
         else {
-            document.getElementById("side-menu").style.display="flex"
-            document.getElementById("right-side").style.display="flex"
+            document.getElementById("side-menu").style.display = "flex"
+            document.getElementById("right-side").style.display = "flex"
         }
     }, [isMobile])
 
@@ -70,7 +70,7 @@ export default function App() {
             const newState = []
             prevState.forEach(note => {
                 if (note.id === currentNoteID) {
-                    !e.target.innerHTML.includes("<img") ? note.title = e.target.innerHTML : e.target.innerHTML = note.title
+                    !e.target.innerHTML.includes("<img") ? note.title = e.target.innerText : e.target.innerHTML = note.title
                     note.isNew && delete note.isNew
                     newState.unshift(note)
                 }
@@ -225,7 +225,6 @@ export default function App() {
             }
         }) : document.getElementById("date-container").innerText = ""
     }
-
 
     function updateTextField(content, field) {
         content ? document.getElementById(field).innerHTML = content : document.getElementById(field).innerHTML = ""

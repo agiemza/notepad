@@ -378,10 +378,6 @@ img {
     background-image: url("./images/redo-darkgray.png");
 }
 
-.hidden {
-    display: none;
-}
-
 @media screen and (max-width: 900px) {
     .app {
         height: 100vh;
