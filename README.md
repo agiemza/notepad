@@ -1,3 +1,5 @@
 # Notepad
 
-Simple notepad app made just for practice.
+Notepad app made to learn React basics.
+
+[Live version](https://agiemza.github.io/notepad/)
